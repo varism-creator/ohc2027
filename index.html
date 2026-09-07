@@ -226,14 +226,25 @@ section{padding:84px 0}
 
 /* ---------- downloads ---------- */
 .files{list-style:none;margin:48px 0 0;padding:0;background:#fff;border:1px solid var(--line);
-  border-top:0;border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04)}
-.files li{display:flex;flex-wrap:wrap;align-items:center;gap:16px;
-  border-top:1px solid var(--line);border-bottom:0;padding:20px 26px}
+  border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.files li + li{border-top:1px solid var(--line)}
+
+/* One row. The whole row is clickable when the file is ready. */
+.filerow{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:20px 26px;
+  color:inherit;text-decoration:none;transition:background .15s}
+a.filerow:hover{background:rgba(13,148,136,.05);text-decoration:none}
+a.filerow:hover .name{color:var(--teal)}
+a.filerow:hover .arrow{background:var(--teal);color:#fff;border-color:var(--teal)}
 .files .icon{width:40px;height:40px;border-radius:10px;background:rgba(13,148,136,.08);
   display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.files .name{font-weight:600;flex:1 1 200px}
+.files .name{font-weight:600;flex:1 1 200px;transition:color .15s}
 .files .meta{font-size:12px;font-weight:700;color:var(--slate-light);letter-spacing:.06em}
 .files .soon{font-style:italic;color:#94a3b8;font-size:14px}
+/* the little round arrow on the right of a ready row */
+.files .arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  color:var(--teal);font-size:15px;transition:background .15s,color .15s,border-color .15s}
+.filerow.pending{opacity:.72}
 
 /* ---------- partners ---------- */
 .logos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -657,17 +668,32 @@ footer a{color:var(--orange)}
 
 <!-- ================================================================
      DOWNLOADS
-     Each file is one <li> ... </li> block, and there are three kinds
-     of last element.
+     Each file is one <li> ... </li> block, and there are two kinds.
 
-     REQUEST BY EMAIL (what the first two use now):
-         <a class="btn btn-ink" href="mailto:...">Request by email</a>
+     READY — the row is a link, so clicking anywhere on it downloads
+     the file. The address must point at a real file inside the
+     files folder:
 
-     A REAL FILE TO DOWNLOAD — put the file in the files folder:
-         <a class="btn btn-ink" href="files/thefile.pdf">Download</a>
+         <li>
+           <a class="filerow" href="files/thefile.pdf" download>
+             ... icon, name, PDF, arrow ...
+           </a>
+         </li>
 
-     NOT OUT YET — grey text:
-         <span class="soon">Published late October</span>
+     NOT OUT YET — the row is a plain block with grey text and no
+     arrow, so nothing is clickable:
+
+         <li>
+           <div class="filerow pending">
+             ... icon, name, PDF, grey sentence ...
+           </div>
+         </li>
+
+     To turn a pending row into a ready one: put the file into the
+     files folder, then change  <div class="filerow pending">  to
+     <a class="filerow" href="files/yourfile.pdf" download>  and
+     change the closing </div> to </a>, and swap the grey sentence
+     for the arrow span.
      ================================================================ -->
 <section id="downloads">
   <div class="wrap">
@@ -679,31 +705,39 @@ footer a{color:var(--orange)}
     <ul class="files">
 
       <li>
-        <span class="icon">📄</span>
-        <span class="name">Abstract template</span>
-        <span class="meta">DOCX</span>
-        <a class="btn btn-ink" href="mailto:iiresearch.cmu@gmail.com?subject=OHC%202027%20-%20Abstract%20template">Request by email</a>
+        <div class="filerow pending">
+          <span class="icon">📄</span>
+          <span class="name">Abstract template</span>
+          <span class="meta">DOCX</span>
+          <span class="soon">Available soon</span>
+        </div>
       </li>
 
       <li>
-        <span class="icon">🖼️</span>
-        <span class="name">Poster specification</span>
-        <span class="meta">PDF</span>
-        <a class="btn btn-ink" href="mailto:iiresearch.cmu@gmail.com?subject=OHC%202027%20-%20Poster%20specification">Request by email</a>
+        <div class="filerow pending">
+          <span class="icon">🖼️</span>
+          <span class="name">Poster specification</span>
+          <span class="meta">PDF</span>
+          <span class="soon">Available soon</span>
+        </div>
       </li>
 
       <li>
-        <span class="icon">🗓️</span>
-        <span class="name">Programme</span>
-        <span class="meta">PDF</span>
-        <span class="soon">Published late October</span>
+        <div class="filerow pending">
+          <span class="icon">🗓️</span>
+          <span class="name">Programme</span>
+          <span class="meta">PDF</span>
+          <span class="soon">Published late October</span>
+        </div>
       </li>
 
       <li>
-        <span class="icon">📖</span>
-        <span class="name">Abstract book</span>
-        <span class="meta">PDF</span>
-        <span class="soon">Published on the first day of the conference</span>
+        <div class="filerow pending">
+          <span class="icon">📖</span>
+          <span class="name">Abstract book</span>
+          <span class="meta">PDF</span>
+          <span class="soon">Published on the first day of the conference</span>
+        </div>
       </li>
 
     </ul>
