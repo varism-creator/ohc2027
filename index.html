@@ -90,6 +90,17 @@ section{padding:84px 0}
 .masthead .wrap{display:flex;align-items:center;gap:24px;min-height:64px;flex-wrap:wrap}
 .mark{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:17px;white-space:nowrap}
 .mark em{font-style:normal;color:var(--teal)}
+
+/* Host logos at the left of the top bar.
+   40px = CMU seal height, 34px = I&I logo height. Change to resize. */
+.brandlogos{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brandlogos img{height:40px;width:auto}
+.brandlogos img + img{height:34px}
+.brandsep{width:1px;height:28px;background:rgba(15,23,42,.15);flex-shrink:0}
+@media (max-width:640px){
+  .brandlogos img{height:32px}
+  .brandlogos img + img{height:27px}
+}
 .nav{margin-left:auto;display:flex;align-items:center;gap:26px;font-size:14.5px;font-weight:500}
 .nav a{color:rgba(15,23,42,.6)}
 .nav a:hover{color:var(--teal);text-decoration:none}
@@ -317,6 +328,11 @@ footer a{color:var(--orange)}
      ================================================================ -->
 <header class="masthead">
   <div class="wrap">
+    <a class="brandlogos" href="#home">
+      <img src="files/CMU.png" alt="Chiang Mai University">
+      <img src="files/II.png" alt="Infection and Immunity Research Group, CMU">
+    </a>
+    <span class="brandsep"></span>
     <span class="mark">One Health <em>2027</em></span>
     <nav class="nav">
       <a href="#about">About</a>
