@@ -201,7 +201,8 @@ section{padding:84px 0}
 .stops .when{display:block;font-weight:700}
 .stops .what{display:block;color:var(--teal);font-weight:600;font-size:14.5px;margin-top:2px}
 .stops .desc{display:block;color:var(--slate-light);font-size:14px;margin-top:8px}
-
+.stops .node{font-weight:800;font-size:18px;color:var(--teal)}
+.stops li.done .node{background:var(--teal);color:#fff}
 /* ---------- register ---------- */
 .regbox{display:grid;grid-template-columns:1.15fr 1fr;background:#fff;
   border:1px solid var(--line);border-radius:26px;overflow:hidden;margin-top:48px}
@@ -256,6 +257,8 @@ a.filerow:hover .arrow{background:var(--teal);color:#fff;border-color:var(--teal
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
   color:var(--teal);font-size:15px;transition:background .15s,color .15s,border-color .15s}
 .filerow.pending{opacity:.72}
+  .files .filerow.pending{max-width:none;margin:0;border:0;border-radius:0;background:transparent;
+  padding:20px 26px;display:flex;align-items:center;gap:16px}
 
 /* ---------- partners ---------- */
 .logos{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
@@ -543,29 +546,29 @@ footer a{color:var(--orange)}
     <div class="rail">
       <ol class="stops">
 
-        <li>
-          <div class="node"></div>
+                <li data-date="2026-09-25">
+          <div class="node">1</div>
           <span class="when">25 September 2026</span>
           <span class="what">Registration opens</span>
           <span class="desc">Free registration opens for all attendees.</span>
         </li>
 
-        <li>
-          <div class="node"></div>
+        <li data-date="2026-10-09">
+          <div class="node">2</div>
           <span class="when">9 October 2026</span>
           <span class="what">Last day to submit an abstract</span>
           <span class="desc">Abstract submission closes at the end of the day.</span>
         </li>
 
-        <li>
-          <div class="node"></div>
+        <li data-date="2026-10-12">
+          <div class="node">3</div>
           <span class="when">12 October 2026</span>
           <span class="what">Acceptance notices sent</span>
           <span class="desc">Accepted presenters are notified by email.</span>
         </li>
 
-        <li>
-          <div class="node"></div>
+        <li data-date="2026-10-30">
+          <div class="node">4</div>
           <span class="when">12 – 30 October 2026</span>
           <span class="what">Poster files due</span>
           <span class="desc">Upload your final poster file via the emailed link.</span>
@@ -621,7 +624,7 @@ footer a{color:var(--orange)}
           </li>
         </ul>
         <p class="abstract-note"><strong>Abstracts:</strong> 300 words maximum, in English,
-        presenting author underlined. Accepted formats are .doc, .docx, and .pdf.</p>
+        presenting author underlined. Accepted formats are .docx and .pdf.</p>
       </div>
 
     </div>
@@ -917,6 +920,9 @@ footer a{color:var(--orange)}
     else              out.innerHTML = "Thank you to everyone who joined us in Chiang Mai.";
   }
 
+    document.querySelectorAll(".stops li[data-date]").forEach(function (li) {
+    if (new Date(li.dataset.date + "T23:59:59+07:00") < new Date()) li.classList.add("done");
+  });
   var bar = document.getElementById("stickybar");
   if (bar) {
     window.addEventListener("scroll", function () {
