@@ -179,6 +179,24 @@ section{padding:84px 0}
 .twoup b{font-size:22px;color:var(--teal);display:block;margin-bottom:6px}
 .twoup span{color:var(--slate-light);font-size:14.5px}
 
+  /* ---------- keynote speakers (two cards side by side) ---------- */
+.speakers{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
+  max-width:900px;margin:48px auto 0}
+.spk{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.spk-photo{aspect-ratio:7/8;background:linear-gradient(135deg,#004a7c,#2c728e 60%,#f1df97)}
+.spk-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+.spk-body{padding:24px 26px 28px;display:flex;flex-direction:column;flex:1}
+.spk-tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--orange);margin:0 0 10px}
+.spk-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:20px;
+  line-height:1.3;color:var(--ink);margin:0 0 18px}
+.spk-name{font-weight:700;font-size:15.5px;margin:auto 0 2px;padding-top:16px;
+  border-top:1px solid var(--line)}
+.spk-role{color:var(--slate-light);font-size:14px;margin:0}
+@media (max-width:760px){
+  .speakers{grid-template-columns:1fr;max-width:440px}
+}
 /* ---------- programme ---------- */
 .programme{background:var(--ink);color:#fff}
 .programme h2{color:#fff;font-size:clamp(1.9rem,4vw,2.7rem)}
@@ -464,49 +482,40 @@ footer a{color:var(--orange)}
 
 
 <!-- ================================================================
-     KEYNOTE SPEAKER
-     To add the photo: save a picture 900 x 600 pixels into the
-     files folder, then replace this line
-
-        <div class="speakerphoto">Speaker photo goes here<br>900 × 600 px</div>
-
-     with this one
-
-        <div class="speakerphoto"><img src="files/speaker.jpg" alt="Speaker name"></div>
+     KEYNOTE SPEAKERS
+     Each speaker is one <article class="spk"> ... </article> block.
+     Photos go in the files folder, 840 x 960 px portrait.
      ================================================================ -->
 <section id="keynote">
-  <div class="wrap">
-    <div class="keynote">
+  <div class="wrap" style="text-align:center">
+    <p class="kicker">Keynote Speakers</p>
+    <h2 style="font-size:clamp(1.9rem,4vw,2.7rem)">Keynote Lectures</h2>
 
-      <div class="speakercard">
-        <div class="speakerphoto">Speaker photo goes here<br>900 × 600 px</div>
-        <p class="role">KEYNOTE SPEAKER</p>
-        <p class="who">To be announced</p>
-        <p class="bio">The keynote speaker and lecture title are confirmed closer to the
-        conference. Registered attendees are emailed as soon as the line-up is final.</p>
-      </div>
+    <div class="speakers" style="text-align:left">
 
-      <div class="body">
-        <span class="tag">Keynote Lecture</span>
-        <h2>The Opening Lecture</h2>
-        <p>The conference opens with a keynote that frames why clinical and environmental
-        research need each other — and what changes when the two are planned together
-        rather than compared afterwards.</p>
-        <p>Sessions across both days are built from accepted abstracts, grouped by the six
-        scope areas, so the programme reflects what the people in the room are actually
-        working on.</p>
-
-        <div class="twoup">
-          <div>
-            <b>Six areas</b>
-            <span>Sessions grouped by scope, from climate and health to vaccine development.</span>
-          </div>
-          <div>
-            <b>Six partners</b>
-            <span>Thai ministries and universities working with LSHTM, UCL, and JIHS.</span>
-          </div>
+      <article class="spk">
+        <div class="spk-photo">
+          <img src="files/keynote-winita.jpg" alt="Associate Professor Winita Punyodom, Ph.D.">
         </div>
-      </div>
+        <div class="spk-body">
+          <p class="spk-tag">Keynote</p>
+          <p class="spk-title">CMU Commitments Toward SDG</p>
+          <p class="spk-name">Associate Professor Winita Punyodom, Ph.D.</p>
+          <p class="spk-role">Vice President, Chiang Mai University</p>
+        </div>
+      </article>
+
+      <article class="spk">
+        <div class="spk-photo">
+          <img src="files/keynote-viroj.jpg" alt="Dr. Viroj Tangcharoensathien">
+        </div>
+        <div class="spk-body">
+          <p class="spk-tag">Keynote</p>
+          <p class="spk-title">Global Health Priorities in Climate Changes</p>
+          <p class="spk-name">Dr. Viroj Tangcharoensathien</p>
+          <p class="spk-role">Consultant to Permanent Secretary and the Office of International Health Policy Development, Ministry of Public Health, Thailand</p>
+        </div>
+      </article>
 
     </div>
   </div>
