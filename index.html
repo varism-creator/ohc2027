@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>One Health 2027 — Clinical and Environmental Research Integration</title>
+<title>One Health 2027: Clinical and Environmental Research Integration</title>
 <meta name="description" content="An open conference hosted by the Faculty of Associated Medical Sciences, Chiang Mai University. 10–11 November 2026, Kantary Hills Hotel, Chiang Mai, Thailand. Free registration.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -186,6 +186,9 @@ section{padding:84px 0}
   display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(15,23,42,.04)}
 .spk-photo{aspect-ratio:7/8;background:linear-gradient(135deg,#004a7c,#2c728e 60%,#f1df97)}
 .spk-photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+/* photo box for a keynote whose speaker is not confirmed yet */
+.spk-photo.tbc{display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.85);font-weight:600;font-size:15px;letter-spacing:.02em}
 .spk-body{padding:24px 26px 28px;display:flex;flex-direction:column;flex:1}
 .spk-tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:var(--orange);margin:0 0 10px}
@@ -206,6 +209,44 @@ section{padding:84px 0}
   display:flex;gap:18px;align-items:flex-start}
 .pending strong{font-size:19px;display:block;margin-bottom:8px}
 .pending p{margin:0;color:var(--slate-light);font-size:15px}
+
+/* ---------- agenda (programme section) ---------- */
+.agenda{max-width:880px;margin:40px auto 0;background:#fff;border-radius:18px;
+  color:var(--ink);text-align:left;padding:6px 30px 24px}
+.agenda-note{margin:20px 0 0;font-size:14px;color:var(--slate-light)}
+.agenda-note b{color:var(--orange);font-weight:700}
+.day-h{font-size:18px;margin:30px 0 4px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.slot{display:grid;grid-template-columns:118px 1fr;gap:4px 18px;padding:14px 0;
+  border-bottom:1px solid var(--line)}
+.slot .t{font-weight:700;font-size:14.5px;color:var(--teal);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.slot .w{font-size:15px}
+.slot .who{display:block;color:var(--slate-light);font-size:14px;margin-top:2px}
+.slot .kn{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;
+  color:var(--orange);text-transform:uppercase;margin-right:6px}
+.slot.brk .t,.slot.brk .w{color:var(--slate-light);font-weight:500}
+/* a session: click the row to open its list of talks */
+details.slot{display:block;padding:0}
+details.slot > summary{display:grid;grid-template-columns:118px 1fr 20px;gap:4px 18px;
+  padding:14px 0;cursor:pointer;list-style:none}
+details.slot > summary::-webkit-details-marker{display:none}
+details.slot > summary::after{content:"+";font-weight:700;color:var(--teal);
+  font-size:20px;line-height:1}
+details.slot[open] > summary::after{content:"\2013"}
+details.slot > summary:hover .w b{color:var(--teal)}
+.talks{list-style:none;margin:0 0 16px;padding:0 0 0 136px}
+.talks li{padding:9px 0;border-top:1px dashed var(--line);font-size:14.5px}
+.talks li span{display:block;color:var(--slate-light);font-size:13.5px;margin-top:2px}
+.talks li span.sc{display:inline;font-size:10.5px;font-weight:700;letter-spacing:.1em;
+  color:var(--teal);text-transform:uppercase;margin:0 6px 0 0}
+@media (max-width:640px){
+  .agenda{padding:4px 18px 20px}
+  .slot{grid-template-columns:1fr;gap:2px}
+  details.slot > summary{grid-template-columns:1fr 20px;gap:2px 10px}
+  details.slot > summary .w{grid-column:1;grid-row:2}
+  details.slot > summary::after{grid-column:2;grid-row:1}
+  .talks{padding-left:0}
+}
 
 /* ---------- key dates ---------- */
 .rail{position:relative;margin-top:56px}
@@ -506,14 +547,12 @@ footer a{color:var(--orange)}
       </article>
 
       <article class="spk">
-        <div class="spk-photo">
-          <img src="files/keynote-viroj.jpg" alt="Dr. Viroj Tangcharoensathien">
-        </div>
+        <div class="spk-photo tbc">Speaker to be confirmed</div>
         <div class="spk-body">
           <p class="spk-tag">Keynote</p>
-          <p class="spk-title">Global Health Priorities in Climate Changes</p>
-          <p class="spk-name">Dr. Viroj Tangcharoensathien</p>
-          <p class="spk-role">Consultant to Permanent Secretary and the Office of International Health Policy Development, Ministry of Public Health, Thailand</p>
+          <p class="spk-title">Global Health Priorities in Climate Change</p>
+          <p class="spk-name">Speaker to be confirmed</p>
+          <p class="spk-role">&nbsp;</p>
         </div>
       </article>
 
@@ -523,23 +562,141 @@ footer a{color:var(--orange)}
 
 
 <!-- ================================================================
-     PROGRAMME — "coming soon" for now.
-     When the real agenda is ready, replace the whole .pending block
-     with your schedule table.
+     PROGRAMME
+     Each plain time slot is one <div class="slot"> line.
+     A break uses  class="slot brk"  so it shows in grey.
+     A session is a <details class="slot"> block: the <summary> line
+     is what people see, and the <ul class="talks"> list opens when
+     they click it. One <li> per talk.
      ================================================================ -->
 <section id="programme" class="programme">
   <div class="wrap" style="text-align:center">
     <p class="kicker">Two Days · One Venue</p>
     <h2>Programme</h2>
-    <p class="lede" style="color:#A9C6D4;margin-top:18px">Two days at a single venue, built from the accepted abstracts.</p>
+    <p class="lede" style="color:#A9C6D4;margin-top:18px">Two keynote lectures and six sessions, with posters on show at every break.</p>
 
-    <div class="pending" style="text-align:left">
-      <div class="icon" style="background:rgba(249,115,22,.1);color:#F97316;font-size:20px;border-radius:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0">🕒</div>
-      <div>
-        <strong style="color:#64748b">Agenda coming soon</strong>
-        <p>The full two-day agenda is published in late October 2026, once sessions are built
-        from the accepted abstracts. Registered attendees are emailed as soon as it is up.</p>
-      </div>
+    <div class="agenda">
+
+      <p class="agenda-note"><b>Programme updated 30 September 2026 and subject to change.</b>
+      Click a session to see its talks. The full programme is also in <a href="#downloads">Downloads</a> as a PDF.</p>
+
+      <!-- ===== DAY 1 ===== -->
+      <h3 class="day-h">Tuesday 10 November 2026</h3>
+
+      <div class="slot brk"><span class="t">07:30–08:30</span><span class="w">Registration &amp; poster set-up</span></div>
+
+      <div class="slot"><span class="t">08:30–08:45</span><span class="w">Opening
+        <span class="who">Phennapha Klangsinsirikul, Dean, Faculty of Associated Medical Sciences, CMU</span></span></div>
+
+      <div class="slot"><span class="t">08:45–09:15</span><span class="w"><span class="kn">Keynote 1</span><b>CMU Commitments Toward SDG</b>
+        <span class="who">Winita Punyodom, Vice President, Chiang Mai University</span></span></div>
+
+      <div class="slot"><span class="t">09:15–09:45</span><span class="w"><span class="kn">Keynote 2</span><b>Global Health Priorities in Climate Change</b>
+        <span class="who">Speaker to be confirmed</span></span></div>
+
+      <div class="slot brk"><span class="t">09:45–10:15</span><span class="w">Group photo &amp; refreshments</span></div>
+
+      <details class="slot">
+        <summary><span class="t">10:15–12:15</span><span class="w"><b>Session I · Climate Change and Its Impacts</b>
+          <span class="who">Chair: Ganjana Lertmemongkolchai, AMS CMU</span></span></summary>
+        <ul class="talks">
+          <li>Highlight: Thailand's One Health Report on Antimicrobial Consumption and Antimicrobial Resistance<span>Speaker to be announced, Health Policy and Systems Research on Antimicrobial Resistance Network</span></li>
+          <li>Respiratory Infections<span>Jeremy Brown, UCL, UK</span></li>
+          <li>Reproductive Health &amp; Thalassemia<span>Sakorn Pornprasert, AMS CMU</span></li>
+          <li>PM2.5 and Innate Immune Memory<span>Tanapat Palaga, Chulalongkorn University</span></li>
+        </ul>
+      </details>
+
+      <div class="slot brk"><span class="t">12:15–13:15</span><span class="w">Lunch &amp; poster viewing</span></div>
+
+      <details class="slot">
+        <summary><span class="t">13:15–15:15</span><span class="w"><b>Session II · Antimicrobial Resistance</b>
+          <span class="who">Chair: Jeremy Brown, UCL, UK</span></span></summary>
+        <ul class="talks">
+          <li>The Clinically Oriented Antimicrobial Resistance Network (ACORN)<span>Speaker to be confirmed</span></li>
+          <li>Antibiotic Resistance, Molecular Epidemiology of Resistant Bacteria, and Nosocomial Infections<span>Chanwit Tribuddharat, Siriraj Hospital</span></li>
+          <li>Antimicrobial Resistance and Biocontrol<span>Jia Liu, Chongqing Sanxia University of Science and Technology, China</span></li>
+          <li><span class="sc">Short talk</span>Infectious Diseases in Hospitals in Northeastern Thailand<span>Kriangkrai Prasert, Nakhon Phanom Hospital</span></li>
+          <li><span class="sc">Short talk</span>Infectious Diseases in Hospitals in Northern Thailand<span>Worawut Worawutwittaya, Lamphun Hospital</span></li>
+        </ul>
+      </details>
+
+      <div class="slot"><span class="t">15:15–15:30</span><span class="w">Turbo talks I
+        <span class="who">Selected from poster abstracts</span></span></div>
+
+      <div class="slot brk"><span class="t">15:30–15:45</span><span class="w">Poster viewing &amp; refreshments</span></div>
+
+      <details class="slot">
+        <summary><span class="t">15:45–17:45</span><span class="w"><b>Session III · Antimicrobial Resistance (cont.)</b>
+          <span class="who">Chair: Brendan Wren, LSHTM, UK</span></span></summary>
+        <ul class="talks">
+          <li>Natural and Acquired Drug Resistance in NTM<span>Manabu Ato, JIHS, Japan</span></li>
+          <li>Current Status and Challenges of NTM Disease<span>Takeshi Kinjo, University of the Ryukyus, Japan</span></li>
+          <li>AMR in Melioidosis<span>Narisara Chantratita, Mahidol University</span></li>
+          <li>Agricultural Microbiology and Antimicrobial Resistance: An Overlooked Opportunity<span>Wasu Pathom-aree, Faculty of Science, CMU</span></li>
+        </ul>
+      </details>
+
+      <!-- ===== DAY 2 ===== -->
+      <h3 class="day-h">Wednesday 11 November 2026</h3>
+
+      <div class="slot brk"><span class="t">08:30–09:00</span><span class="w">Registration</span></div>
+
+      <details class="slot">
+        <summary><span class="t">09:00–10:30</span><span class="w"><b>Session IV · Air Pollution &amp; Health Effects</b>
+          <span class="who">Chair: Tansy Edwards, LSHTM, UK</span></span></summary>
+        <ul class="talks">
+          <li>The Future of Tracking and Reducing Personal Air Pollution Exposure<span>William Hicks, Air Aware Labs, UK (online)</span></li>
+          <li>NCDs and PM2.5<span>Chaisiri Angkuwaranon, Faculty of Medicine, CMU</span></li>
+          <li><span class="sc">Short talk</span>Characterization of Airborne Microbial Communities in Northern Thailand<span>Nattiporn Yabueng, Environmental Science Research Center, CMU</span></li>
+          <li><span class="sc">Short talk</span>Community-based Study: Effect of PM2.5 on Host Inflammation<span>Chidchamai Kewcharoenwong, AMS CMU</span></li>
+        </ul>
+      </details>
+
+      <div class="slot brk"><span class="t">10:30–10:45</span><span class="w">Coffee break &amp; poster viewing</span></div>
+
+      <details class="slot">
+        <summary><span class="t">10:45–11:45</span><span class="w"><b>Session IV · Air Pollution &amp; Health Effects (cont.)</b>
+          <span class="who">Chair: Tansy Edwards, LSHTM, UK</span></span></summary>
+        <ul class="talks">
+          <li>Particulate Matter and Cancer Immunosurveillance<span>Aussara Panya, Faculty of Science, CMU</span></li>
+          <li>Seasonal PM2.5 Exposure and Health Effects<span>Natthapol Kosashunhanan, Research Institute for Health Sciences, CMU</span></li>
+        </ul>
+      </details>
+
+      <div class="slot"><span class="t">11:45–12:00</span><span class="w">Turbo talks II
+        <span class="who">Selected from poster abstracts</span></span></div>
+
+      <div class="slot brk"><span class="t">12:00–13:00</span><span class="w">Lunch &amp; poster viewing</span></div>
+
+      <details class="slot">
+        <summary><span class="t">13:00–15:15</span><span class="w"><b>Session V · Vaccine Development &amp; Innovation</b>
+          <span class="who">Chair: Jeremy Brown, UCL, UK</span></span></summary>
+        <ul class="talks">
+          <li>A Golden Era for the Development of Veterinary Vaccines<span>Brendan Wren, LSHTM, UK</span></li>
+          <li>Structure- and Immunology-guided Vaccine Design<span>Yoshimasa Takahashi, JIHS, Japan</span></li>
+          <li>Identification of Novel Vaccine Targets for <i>A. baumannii</i><span>Richard Stabler, LSHTM, UK</span></li>
+          <li>Design and Analysis of Trials to Evaluate Therapeutics, Vaccines and Other Global Health Interventions<span>Tansy Edwards, LSHTM, UK</span></li>
+          <li><span class="sc">Short talk</span>From Cells to Spatial Biology to Therapeutics: Computational Innovations for Precision Medicine<span>Thatchayut Unjitwattana, BMEi, CMU</span></li>
+        </ul>
+      </details>
+
+      <div class="slot brk"><span class="t">15:15–15:30</span><span class="w">Coffee break &amp; poster viewing</span></div>
+
+      <details class="slot">
+        <summary><span class="t">15:30–17:30</span><span class="w"><b>Session VI · Transboundary Zoonoses</b>
+          <span class="who">Chair: Ganjana Lertmemongkolchai, AMS CMU</span></span></summary>
+        <ul class="talks">
+          <li>Transboundary Zoonoses in Thailand<span>Onphirul Yurachai, Coordinating Unit for One Health, Ministry of Public Health, Thailand (online)</span></li>
+          <li>Zoonosis in Southeast Asia<span>Woottichai Khamduang, AMS CMU</span></li>
+          <li>Molecular Pathogenic Mechanisms of Animal Viruses &amp; Innovative Vaccine Research<span>Speaker to be confirmed</span></li>
+          <li><span class="sc">Short talk</span>New Era of Rabies Control: Oral Vaccination for Stray Dogs in Chiang Mai<span>Wilaiwan Petsophonsakul, Lanna Dog Welfare</span></li>
+          <li><span class="sc">Short talk</span>Title to be announced<span>Kawiporn Chinachanta, Multidisciplinary Research Institute, CMU</span></li>
+        </ul>
+      </details>
+
+      <div class="slot"><span class="t">17:30–17:45</span><span class="w">Closing remarks</span></div>
+
     </div>
   </div>
 </section>
@@ -608,7 +765,7 @@ footer a{color:var(--orange)}
 
         <ul class="checklist">
           <li><span class="tick">✓</span>Tell us which days you&rsquo;ll join and any dietary requirements</li>
-          <li><span class="tick">✓</span>Choose your role — attending, presenting, or chairing</li>
+          <li><span class="tick">✓</span>Choose your role: attending, presenting, or chairing</li>
           <li><span class="tick">✓</span>You&rsquo;ll get a confirmation email with a copy of your answers</li>
         </ul>
 
@@ -924,10 +1081,10 @@ footer a{color:var(--orange)}
     var a = days(ABSTRACT_DEADLINE + "T23:59:59+07:00");
     var e = days(EVENT_START + "T09:00:00+07:00");
 
-    if (a > 1)        out.innerHTML = "Abstract submission closes 9 October 2026 — <strong>" + a + " days</strong> left.";
+    if (a > 1)        out.innerHTML = "Abstract submission closes 9 October 2026. <strong>" + a + " days</strong> left.";
     else if (a === 1) out.innerHTML = "Abstract submission closes <strong>tomorrow</strong>.";
     else if (a >= 0)  out.innerHTML = "Abstract submission closes <strong>today</strong>.";
-    else if (e > 1)   out.innerHTML = "Abstracts are closed. Registration is still open — the conference opens in <strong>" + e + " days</strong>.";
+    else if (e > 1)   out.innerHTML = "Abstracts are closed. Registration is still open, and the conference opens in <strong>" + e + " days</strong>.";
     else if (e >= 0)  out.innerHTML = "<strong>The conference starts today.</strong>";
     else              out.innerHTML = "Thank you to everyone who joined us in Chiang Mai.";
   }
